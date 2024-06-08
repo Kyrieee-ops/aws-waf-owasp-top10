@@ -38,9 +38,11 @@ Parameters:
       - kga01-prd  # 本番環境
     Default: kga01-dev
   
+  # 
   stackmetricPrefix:
     Type: String
     Description: metric name
+    ConstraintDescription: Alphanumeric characters only
     AllowedValues:
          - kga01dev
          - kga01stg
@@ -1187,7 +1189,7 @@ Resources:
     Type: AWS::WAF::WebACL
     Condition: IsDevAndGlobal
     Properties:
-      MetricName: !Join ['', [!Ref stackPrefix, 'owaspacl']]
+      MetricName: !Join ['', [!Ref stackmetricPrefix, 'owaspacl']]
       Name: !Join ['-', [!Ref stackPrefix, 'owasp-acl']]
       DefaultAction:
         Type: ALLOW
