@@ -102,13 +102,18 @@ Parameters:
 
 ## ::METADATA::
 ## CloudFormation parameter UI definitions
+## CloudFormationを作成する際に、パラメータの順番を定義した順番に設定する。
 Metadata:
   AWS::CloudFormation::Interface:
     ParameterGroups:
       - Label:
-          default: Resource Prefix
+          Resource Prefix
         Parameters:
           - stackPrefix
+      - Label:
+          - MetricResource Prefix
+        Parameters:
+          - stackmetricPrefix
       - Label:
           default: WAF Implementation
         Parameters:
