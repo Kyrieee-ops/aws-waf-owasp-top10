@@ -31,14 +31,15 @@ Parameters:
     # MaxLength: 10
     # Default: generic # WebACLとRulesのPrefix名の指定となる。
     # 環境の命名付与を定義しておき、conditionで使い分ける
-    # CloudWatch metric名が
+    # AWSの仕様上、次の文字列は名前に指定できないawswaf,aws,waf,rulegroup,webacl,regexpatternset,ipsetmanaged
     AllowedValues:
       - kga01-dev  # 開発環境
       - kga01-stg  # 検証環境
       - kga01-prd  # 本番環境
     Default: kga01-dev
   
-  # 
+  # CloudWatch metric用の名前パラメータ
+  # 「-」が使用できないため、環境パラメータとは別にPrefixを定義する
   stackmetricPrefix:
     Type: String
     Description: metric name
