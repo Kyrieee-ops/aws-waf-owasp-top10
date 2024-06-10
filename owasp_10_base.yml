@@ -33,10 +33,10 @@ Parameters:
     # 環境の命名付与を定義しておき、conditionで使い分ける
     # AWSの仕様上、次の文字列は名前に指定できないawswaf,aws,waf,rulegroup,webacl,regexpatternset,ipsetmanaged
     AllowedValues:
-      - kga01-dev  # 開発環境
-      - kga01-stg  # 検証環境
-      - kga01-prd  # 本番環境
-    Default: kga01-dev
+      - env01-dev  # 開発環境
+      - env01-stg  # 検証環境
+      - env01-prd  # 本番環境
+    Default: env01-dev
   
   # CloudWatch metric用の名前パラメータ
   # 「-」が使用できないため、環境パラメータとは別にPrefixを定義する
@@ -45,10 +45,10 @@ Parameters:
     Description: metric name
     ConstraintDescription: Alphanumeric characters only
     AllowedValues:
-         - kga01dev
-         - kga01stg
-         - kga01prd
-    Default: kga01dev
+         - env01dev
+         - env01stg
+         - env01prd
+    Default: env01dev
 
   stackScope:
     Type: String
@@ -176,30 +176,30 @@ Metadata:
 Conditions: # 開発環境 and Globalの場合という条件にしたい場合
   # Global環境かつ各環境の条件
   IsDevAndGlobal: !And
-    - !Equals [ !Ref stackPrefix, "kga01-dev" ]
-    - !Equals [ !Ref stackmetricPrefix, "kga01dev" ]
+    - !Equals [ !Ref stackPrefix, "env01-dev" ]
+    - !Equals [ !Ref stackmetricPrefix, "env01dev" ]
     - !Equals [ !Ref stackScope, "Global" ]
   IsstgAndGlobal: !And
-    - !Equals [ !Ref stackPrefix, "kga01-stg" ]
-    - !Equals [ !Ref stackmetricPrefix, "kga01stg" ]
+    - !Equals [ !Ref stackPrefix, "env01-stg" ]
+    - !Equals [ !Ref stackmetricPrefix, "env01stg" ]
     - !Equals [ !Ref stackScope, "Global" ]
   IsProdAndGlobal: !And
-    - !Equals [ !Ref stackPrefix, "kga01-prd" ]
-    - !Equals [ !Ref stackmetricPrefix, "kga01prd" ]
+    - !Equals [ !Ref stackPrefix, "env01-prd" ]
+    - !Equals [ !Ref stackmetricPrefix, "env01prd" ]
     - !Equals [ !Ref stackScope, "Global" ]
   
   # Regional環境かつ各環境の条件
   IsDevAndRegional: !And
-    - !Equals [ !Ref stackPrefix, "kga01-dev" ]
-    - !Equals [ !Ref stackmetricPrefix, "kga01dev" ]
+    - !Equals [ !Ref stackPrefix, "env01-dev" ]
+    - !Equals [ !Ref stackmetricPrefix, "env01dev" ]
     - !Equals [ !Ref stackScope, "Regional" ]
   IsstgAndRegional: !And
-    - !Equals [ !Ref stackPrefix, "kga01-stg" ]
-    - !Equals [ !Ref stackmetricPrefix, "kga01stg" ]
+    - !Equals [ !Ref stackPrefix, "env01-stg" ]
+    - !Equals [ !Ref stackmetricPrefix, "env01stg" ]
     - !Equals [ !Ref stackScope, "Regional" ]
   IsProdAndRegional: !And
-    - !Equals [ !Ref stackPrefix, "kga01-prd" ]
-    - !Equals [ !Ref stackmetricPrefix, "kga01prd" ]
+    - !Equals [ !Ref stackPrefix, "env01-prd" ]
+    - !Equals [ !Ref stackmetricPrefix, "env01prd" ]
     - !Equals [ !Ref stackScope, "Regional" ]
 
 
